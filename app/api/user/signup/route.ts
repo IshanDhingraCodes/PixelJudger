@@ -1,3 +1,4 @@
+import verificationEmail from "@/lib/emailVerification";
 import prisma from "@/lib/prisma";
 import { signUpSchema } from "@/schema/user.validation";
 import bcrypt from "bcryptjs";
@@ -51,6 +52,8 @@ export async function POST(req: NextRequest) {
         password: hashedPassword,
       },
     });
+
+    verificationEmail(user.email);
 
     return NextResponse.json(
       {

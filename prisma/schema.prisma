@@ -8,10 +8,20 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(uuid())
-  name            String
-  email           String   @unique
-  password        String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  isVerified Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model verifyEmailToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String
+  expireAt  BigInt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
